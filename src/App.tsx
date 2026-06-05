@@ -49,6 +49,21 @@ interface BrandElement {
 
 // --- Helpers ---
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const withFormat = (src: string, fmt: string) => src.replace(/\.(jpg|jpeg|png)$/, `.${fmt}`);
+
+const Img = ({ src, alt, className, referrerPolicy, loading }: {
+  src: string; alt: string; className?: string; referrerPolicy?: string; loading?: 'lazy' | 'eager';
+}) => {
+  const isLocal = !src.startsWith('http');
+  if (!isLocal) return <img src={src} alt={alt} className={className} referrerPolicy={referrerPolicy} loading={loading} />;
+  return (
+    <picture>
+      <source srcSet={withFormat(src, 'avif')} type="image/avif" />
+      <source srcSet={withFormat(src, 'webp')} type="image/webp" />
+      <img src={src} alt={alt} className={className} referrerPolicy={referrerPolicy} loading={loading} />
+    </picture>
+  );
+};
 
 // --- Data ---
 const BRAND_DATA: BrandElement[] = [
@@ -427,11 +442,12 @@ const DetailCard = ({ item, sectionId }: { item: { name: string, detail: string,
         </div>
       ) : item.image && (
         <div className="mb-6 aspect-square rounded-md overflow-hidden border border-zinc-800 bg-black p-4 relative group/image">
-          <img 
-            src={item.image} 
-            alt={item.name} 
+          <Img
+            src={item.image}
+            alt={item.name}
             className={`w-full h-full ${item.objectFit === 'contain' ? 'object-contain' : 'object-cover'} group-hover:scale-110 transition-transform duration-500`}
             referrerPolicy="no-referrer"
+            loading="lazy"
           />
         </div>
       )}
@@ -680,7 +696,7 @@ export default function App() {
                     <div className={`relative rounded-2xl overflow-hidden border border-zinc-800 group transition-all duration-500 ${
                       element.id === 'uniforms' ? 'aspect-[16/10]' : 'aspect-video'
                     }`}>
-                      <img 
+                      <Img
                         src={
                           element.id === 'identity'
                             ? asset('/assets/imgs/the-style-vibe.jpg')
@@ -688,8 +704,8 @@ export default function App() {
                               ? asset('/assets/imgs/colour-palette-hero-img.jpg')
                               : element.id === 'tableware'
                                 ? asset('/assets/imgs/tableware-hero-img.jpg')
-                                : element.id === 'locations' 
-                              ? 'https://i.imgur.com/gNL13PE.jpeg' 
+                                : element.id === 'locations'
+                              ? 'https://i.imgur.com/gNL13PE.jpeg'
                               : element.id === 'logo'
                                 ? asset('/assets/imgs/mojos-logo-hero.jpg')
                                 : element.id === 'typography'
@@ -703,11 +719,11 @@ export default function App() {
                                         : element.id === 'furniture'
                                           ? asset('/assets/imgs/furniture-style-ideas.jpg')
                                           : `https://picsum.photos/seed/${element.id}/1200/800?grayscale`
-                        } 
+                        }
                         alt={element.title}
                         className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${
-                          element.id === 'uniforms' 
-                            ? 'object-top opacity-90' 
+                          element.id === 'uniforms'
+                            ? 'object-top opacity-90'
                             : 'object-[center_35%] opacity-40'
                         }`}
                         referrerPolicy="no-referrer"
