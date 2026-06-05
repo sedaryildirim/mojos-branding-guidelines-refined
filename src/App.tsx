@@ -604,7 +604,7 @@ export default function App() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/assets/imgs/website-hero-img.jpg" 
+            src={asset('/assets/imgs/website-hero-img.jpg')}
             alt="Mojo's Hero" 
             className="w-full h-full object-cover opacity-40 grayscale"
             referrerPolicy="no-referrer"
@@ -618,7 +618,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-red-600 font-mono text-sm tracking-[0.4em] uppercase mb-4 block">Official Branding Guidelines</span>
+            <span className="text-red-600 font-mono text-sm tracking-[0.4em] uppercase mb-4 block">Branding Suggestions</span>
             <h1 className="text-[15vw] md:text-[12vw] font-display leading-[0.85] uppercase tracking-tighter mb-8">
               Mojo's
             </h1>
