@@ -5,16 +5,16 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
-import { 
-  Music, 
-  Utensils, 
-  Palette, 
-  Type, 
-  Layout, 
-  Users, 
-  Coffee, 
-  ChevronRight, 
-  Flame, 
+import {
+  Music,
+  Utensils,
+  Palette,
+  Type,
+  Layout,
+  Users,
+  Coffee,
+  ChevronRight,
+  Flame,
   Zap,
   Disc,
   Mic2,
@@ -24,7 +24,8 @@ import {
   Copy,
   Check,
   ArrowUp,
-  X
+  X,
+  Menu
 } from 'lucide-react';
 
 // --- Types ---
@@ -33,9 +34,9 @@ interface BrandElement {
   title: string;
   icon: React.ReactNode;
   description: string | React.ReactNode;
-  items: { 
-    name: string; 
-    detail: string; 
+  items: {
+    name: string;
+    detail: string;
     image?: string;
     mapEmbed?: string;
     link?: string;
@@ -73,33 +74,33 @@ const BRAND_DATA: BrandElement[] = [
     icon: <FlameKindling className="w-6 h-6" />,
     description: "Mojo's is a bold, flavour-first American comfort food destination. All flavour. No fuss.",
     items: [
-      { 
-        name: 'The Concept', 
+      {
+        name: 'The Concept',
         detail: "Mojo's is a bold, flavour-first American comfort food destination. Think crispy, indulgent, unapologetically satisfying - the kind of food that has regulars coming back twice a week and first-timers instantly hooked.\n\nBold. Flavor-first. Unapologetic.\n\nThe Vibe: Indulgent American comfort food.\n\nThe Food: Crispy, satisfying, and high-impact.\n\nThe Goal: Instant hooks and high-frequency regulars.",
         image: asset('/assets/imgs/the-style-vibe.jpg')
       },
-      { 
-        name: 'Smash Burgers', 
+      {
+        name: 'Smash Burgers',
         detail: "The undisputed hero. Seven builds ranging from the classic Bacon Cheese to the showstopping Brisket, each one crafted with intention. These aren't afterthoughts - they're the reason people walk through the door.\n\nThe main event. Seven intentional builds-from the Classic Bacon Cheese to the signature Brisket.\n\nPurpose: The primary driver of foot traffic.\n\nRange: 7-8 distinct, chef-driven variations.\n\nQuality: Zero afterthoughts; pure intention.",
         image: asset('/assets/imgs/smash-burger.jpg')
       },
-      { 
-        name: 'Street-Style Starters', 
+      {
+        name: 'Street-Style Starters',
         detail: "Tacos on fried cheese tallow tortillas, loaded fries stacked with pulled pork and chipotle chicken. These are shareable, craveable, and highly Instagram-able.",
         image: asset('/assets/imgs/buttermilk-chicken-taco.jpg')
       },
-      { 
-        name: 'Southern Fried Chicken', 
+      {
+        name: 'Southern Fried Chicken',
         detail: "Woven throughout the menu as a recurring signature, from tenders to tacos to burgers. It's a thread that ties the whole offering together.",
         image: asset('/assets/imgs/southern-fried-wings.jpg')
       },
-      { 
-        name: 'The Feeling', 
+      {
+        name: 'The Feeling',
         detail: "Mojo's doesn't take itself too seriously - but it takes its food very seriously. It's relaxed, confident, and a little bit rowdy. \"The best meal you didn't need to dress up for.\"",
         image: asset('/assets/imgs/the-feeling-group-shot.jpg')
       },
-      { 
-        name: 'The Tagline', 
+      {
+        name: 'The Tagline',
         detail: "All flavour. No fuss.",
         image: asset('/assets/imgs/all-flavour-no-fuss.jpg')
       }
@@ -111,26 +112,26 @@ const BRAND_DATA: BrandElement[] = [
     icon: <Disc className="w-6 h-6" />,
     description: 'The visual heartbeat of Mojo\'s. A bold, circular emblem that signifies the Mojo\'s identity.',
     items: [
-      { 
-        name: 'Master Logo: Variation 1', 
+      {
+        name: 'Master Logo: Variation 1',
         detail: 'The primary mark featuring the iconic Mojo\'s typography with a distressed, wood-fired texture. Circular composition for maximum versatility across social and physical media.',
         image: asset('/assets/logos/logo-variation-1.png'),
         objectFit: 'contain'
       },
-      { 
-        name: 'Master Logo: Variation 2', 
+      {
+        name: 'Master Logo: Variation 2',
         detail: 'A simplified, high-contrast version for small-scale printing and embroidery. Removes fine distressing for clarity.',
         image: asset('/assets/logos/logo-variation-2.png'),
         objectFit: 'contain'
       },
-      { 
-        name: 'Master Logo: Variation 3', 
+      {
+        name: 'Master Logo: Variation 3',
         detail: 'A stylized version designed for digital displays and neon signage. Emphasizes the Crimson and Orange glow.',
         image: asset('/assets/logos/logo-variation-3.png'),
         objectFit: 'contain'
       },
-      { 
-        name: 'Master Logo: Variation 4', 
+      {
+        name: 'Master Logo: Variation 4',
         detail: 'A rugged, stencil-style variant for spray-painting on shipping crates and outdoor pit equipment.',
         image: asset('/assets/logos/logo-variation-4.png'),
         objectFit: 'contain'
@@ -141,28 +142,28 @@ const BRAND_DATA: BrandElement[] = [
     id: 'typography',
     title: 'Typography',
     icon: <Type className="w-6 h-6" />,
-    description: 'The website uses four distinct font families to create a technical yet bold "Smokehouse" aesthetic.',
+    description: 'The website uses four distinct font families to create a technical yet bold aesthetic.',
     items: [
-      { 
-        name: 'Display Font: Anton', 
+      {
+        name: 'Display Font: Anton',
         detail: 'Heavy, Condensed Sans-Serif. Usage: Large branding, hero titles, background watermarks.',
         fontFamily: 'font-display',
         samples: ['MOJO FIRE SMOKE', 'mojo fire smoke']
       },
-      { 
-        name: 'Heading Font: Space Grotesk', 
+      {
+        name: 'Heading Font: Space Grotesk',
         detail: 'Modern Geometric Sans-Serif. Usage: Section labels, menu titles.',
         fontFamily: 'font-heading',
         samples: ['MOJO FIRE SMOKE', 'mojo fire smoke']
       },
-      { 
-        name: 'Body Font: Inter', 
+      {
+        name: 'Body Font: Inter',
         detail: 'Clean, highly legible Sans-Serif. Common Classes: font-sans.',
         fontFamily: 'font-sans',
         samples: ['MOJO FIRE SMOKE', 'mojo fire smoke']
       },
-      { 
-        name: 'Monospace Font: Roboto Mono', 
+      {
+        name: 'Monospace Font: Roboto Mono',
         detail: 'Technical Monospace. Usage: Prices, labels, "Back to top" button, small-caps metadata.',
         fontFamily: 'font-mono',
         samples: ['MOJO FIRE SMOKE', 'mojo fire smoke']
@@ -200,21 +201,21 @@ const BRAND_DATA: BrandElement[] = [
       </>
     ),
     items: [
-      { 
-        name: 'Lamai Outpost', 
-        detail: 'Signature location for optimal size, covers, and location for tourists and grab delivery radius - not too big, not too small - has more refined vision brand', 
+      {
+        name: 'Lamai Outpost',
+        detail: 'Signature location for optimal size, covers, and location for tourists and grab delivery radius - not too big, not too small - has more refined vision brand',
         mapEmbed: 'https://maps.google.com/maps?q=9.464096763954156,100.0434715411214&t=&z=15&ie=UTF8&iwloc=&output=embed',
         link: 'https://maps.app.goo.gl/Rvg99Cx8WrZPm2bS7'
       },
-      { 
-        name: 'Chaloklum Hub', 
-        detail: 'Slightly oversized for the our needs in Chaloklum, has V1 of previous branding ideas, lots of changes between chaloklum and lamai', 
+      {
+        name: 'Chaloklum Hub',
+        detail: 'Slightly oversized for the our needs in Chaloklum, has V1 of previous branding ideas, lots of changes between chaloklum and lamai',
         mapEmbed: 'https://maps.google.com/maps?q=9.786670871753794,100.00766608345157&t=&z=15&ie=UTF8&iwloc=&output=embed',
         link: 'https://maps.app.goo.gl/Z1gZdZvnXPqdELsM7'
       },
-      { 
-        name: 'Thong Sala', 
-        detail: 'Food Court - Quick, Dirty Take away, location good for tourists and KPG Delivery radius', 
+      {
+        name: 'Thong Sala',
+        detail: 'Food Court - Quick, Dirty Take away, location good for tourists and KPG Delivery radius',
         mapEmbed: 'https://maps.google.com/maps?q=Mojo%27s%20Thong%20Sala%20Koh%20Phangan&t=&z=15&ie=UTF8&iwloc=&output=embed',
         link: 'https://maps.app.goo.gl/ReKr3REoTqDEpkRr6'
       },
@@ -232,33 +233,33 @@ const BRAND_DATA: BrandElement[] = [
     icon: <Utensils className="w-6 h-6" />,
     description: 'Industrial-grade materials that can handle the volume and the grease.',
     items: [
-      { 
-        name: 'Plateware', 
+      {
+        name: 'Plateware',
         detail: 'Matte black stoneware with irregular, organic edges. Feels like raw earth.',
         image: asset('/assets/imgs/matte-black-plateware.jpg')
       },
-      { 
-        name: 'Burger Plate', 
+      {
+        name: 'Burger Plate',
         detail: 'Heavy-set matte black plate designed for our signature smash burgers. Wide rim for easy handling and grease-resistant finish.',
         image: asset('/assets/imgs/matte-black-burger-taco-plates.jpg')
       },
-      { 
-        name: 'Taco Plate', 
+      {
+        name: 'Taco Plate',
         detail: 'Elongated platter for our tacos. Perfect for sharing and displaying vibrant salsa colors.',
         image: asset('/assets/imgs/matte-black-burger-taco-plates.jpg')
       },
-      { 
-        name: 'Loaded Fries Bowl', 
+      {
+        name: 'Loaded Fries Bowl',
         detail: 'Deep, industrial-style bowl for our pit-fired loaded fries. Retains heat and stands up to heavy toppings.',
         image: asset('/assets/imgs/matte-black-burger-bowl.jpg')
       },
-      { 
-        name: 'Matte Black Cutlery & Plate Set', 
+      {
+        name: 'Matte Black Cutlery & Plate Set',
         detail: 'A complete set featuring our signature matte black plateware paired with brushed gunmetal flatware.',
         image: asset('/assets/imgs/matte-black-cutlery-plate-set.jpg')
       },
-      { 
-        name: 'Plateware & Cutlery', 
+      {
+        name: 'Plateware & Cutlery',
         detail: 'The perfect pairing of organic stoneware and industrial-grade steel.',
         image: asset('/assets/imgs/plateware-cutlery.jpg')
       }
@@ -282,19 +283,19 @@ const BRAND_DATA: BrandElement[] = [
     icon: <Users className="w-6 h-6" />,
     description: 'The crew is part of the show. No stiff collars here.',
     items: [
-      { 
-        name: 'Front of House', 
+      {
+        name: 'Front of House',
         detail: "Mojo's logo'd T (Front small logo - back Large Logo). Denim jeans or shorts, rolled up sleeves.",
         image: asset('/assets/imgs/mojos-vintage-tee-front.jpg')
       },
-      { 
-        name: 'Kitchen Crew', 
+      {
+        name: 'Kitchen Crew',
         detail: 'Chefs blacks, thin / easy to wear style, vintage washed, logo embroidery - rolled up sleeves, give a rough tough vibe',
         image: asset('/assets/imgs/mojos-chefs-blacks.jpg')
       },
       { name: 'The Full Look', detail: 'Dark / denim look, with pop of colour depending on style preference for bandanas - fits with the dark red / blacks of the colour branding - logo can be red also! make it pop.', image: asset('/assets/imgs/staff-full-uniform.jpg') },
-      { 
-        name: 'Accessories', 
+      {
+        name: 'Accessories',
         detail: 'Branded Mojo\'s bandanas and guitar-pick-shaped name badges.',
         image: asset('/assets/imgs/mojos-bandana.jpg')
       }
@@ -306,23 +307,23 @@ const BRAND_DATA: BrandElement[] = [
     icon: <Music className="w-6 h-6" />,
     description: "The heartbeat of Mojo's. If it doesn't have soul and grit, it doesn't play.",
     items: [
-      { 
-        name: 'Classic Soul & Motown Royalty', 
+      {
+        name: 'Classic Soul & Motown Royalty',
         detail: 'Deep roots in 1960s-70s soul - Marvin Gaye, Aretha Franklin, Stevie Wonder, Sam & Dave, Wilson Pickett, Al Green. The foundation of the playlist, full of groove, emotion, and timeless vocal power.',
         image: asset('/assets/imgs/stevie-wonder-album.jpg')
       },
-      { 
-        name: 'The Blues Lineage', 
+      {
+        name: 'The Blues Lineage',
         detail: 'Ray Charles, B.B. King, John Lee Hooker, Bo Diddley, Big Joe Turner. This thread ties together the rawer, more rootsy side of the list, from boogie-woogie to soul blues, acting as the spiritual backbone.',
         image: asset('/assets/imgs/bb-king-album.jpg')
       },
-      { 
-        name: 'Funk, Disco & Groove', 
+      {
+        name: 'Funk, Disco & Groove',
         detail: 'Earth, Wind & Fire, Kool & the Gang, James Brown, and Ike & Tina Turner. Highest-energy entries, made for moving, bridging soul to the dancefloor.',
         image: asset('/assets/imgs/james-brown-album.jpg')
       },
-      { 
-        name: 'Classic Rock & Its Outliers', 
+      {
+        name: 'Classic Rock & Its Outliers',
         detail: 'The Rolling Stones, Led Zeppelin, Pink Floyd, Fleetwood Mac, The Police, Patti Smith, David Bowie, Roxy Music, The Cruel Sea, and Nick Cave. Rock that carries a similar spirit to soul/blues.',
         image: asset('/assets/imgs/rolling-stones-album.jpg')
       }
@@ -381,23 +382,23 @@ const BRAND_DATA: BrandElement[] = [
     icon: <Monitor className="w-6 h-6" />,
     description: 'Our presence across physical and digital stages. Every touchpoint is a performance.',
     items: [
-      { 
-        name: 'Take Out Packaging', 
+      {
+        name: 'Take Out Packaging',
         detail: 'Pizza-style boxes for tacos/burgers with "Gig Poster" graphics. Heavy-duty, grease-resistant.',
         image: asset('/assets/imgs/take-away-branding.jpg')
       },
-      { 
-        name: 'Website / Online Presence', 
+      {
+        name: 'Website / Online Presence',
         detail: 'High-contrast, high-performance digital hub.',
         image: asset('/assets/imgs/website-hero-img.jpg')
       },
-      { 
-        name: 'Social Media Channels', 
+      {
+        name: 'Social Media Channels',
         detail: 'Aggressive, high-energy content. Focusing on the "Grab" shot.',
         image: asset('/assets/imgs/social-media-icons.jpg')
       },
-      { 
-        name: 'Sunday Roast Marketing', 
+      {
+        name: 'Sunday Roast Marketing',
         detail: 'Aggressive marketing for Sunday Roasts. Showcase limited availability so people know they have to book — miss it and it\'s gone.',
         image: asset('/assets/imgs/sunday-roast.jpg')
       }
@@ -410,19 +411,20 @@ const BRAND_DATA: BrandElement[] = [
 const NavItem = ({ element, active, onClick }: { element: BrandElement, active: boolean, onClick: () => void, key?: React.Key }) => (
   <button
     onClick={onClick}
-    className={`w-full flex items-center gap-4 p-4 transition-all duration-300 border-l-4 ${
-      active 
-        ? 'bg-white/5 border-red-600 text-white' 
+    aria-current={active ? 'true' : undefined}
+    className={`w-full flex items-center gap-4 p-4 transition-colors duration-300 border-l-4 ${
+      active
+        ? 'bg-white/5 border-live-ember text-white'
         : 'border-transparent text-zinc-500 hover:text-zinc-300 hover:bg-white/2'
     }`}
   >
-    <div className={`${active ? 'text-red-600' : 'text-zinc-600'}`}>
+    <div className={`${active ? 'text-live-ember' : 'text-zinc-600'}`}>
       {element.icon}
     </div>
     <span className="font-medium uppercase tracking-widest text-sm">{element.title}</span>
     {active && (
       <motion.div layoutId="active-nav" className="ml-auto">
-        <ChevronRight className="w-4 h-4 text-red-600" />
+        <ChevronRight className="w-4 h-4 text-live-ember" />
       </motion.div>
     )}
   </button>
@@ -433,7 +435,7 @@ const DetailCard = ({ item, sectionId }: { item: { name: string, detail: string,
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="group relative bg-zinc-900/50 border border-zinc-800 p-6 rounded-lg hover:border-red-600/50 transition-all duration-300 overflow-hidden"
+      className="group relative bg-zinc-900/50 border border-zinc-800 p-6 rounded-lg hover:border-live-ember/50 transition-colors duration-300 overflow-hidden"
     >
       {item.color ? (
         <div className="mb-6 aspect-square rounded-md overflow-hidden border border-zinc-800 flex items-center justify-center relative group/color" style={{ backgroundColor: item.color }}>
@@ -465,17 +467,17 @@ const DetailCard = ({ item, sectionId }: { item: { name: string, detail: string,
         </div>
       )}
       <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-100 transition-opacity">
-        <Zap className="w-4 h-4 text-red-600" />
+        <Zap className="w-4 h-4 text-live-ember" />
       </div>
-      <h4 className={`text-red-500 font-bold uppercase tracking-tighter text-lg mb-2 ${item.fontFamily || ''}`}>{item.name}</h4>
+      <h4 className={`text-live-ember font-bold uppercase tracking-tighter text-lg mb-2 ${item.fontFamily || ''}`}>{item.name}</h4>
       <p className="text-zinc-400 text-sm leading-relaxed mb-4 whitespace-pre-line">{item.detail}</p>
-      
+
       {item.link && (
-        <a 
-          href={item.link} 
-          target="_blank" 
+        <a
+          href={item.link}
+          target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-red-600 hover:text-red-500 transition-colors border border-red-600/20 px-3 py-2 rounded bg-red-600/5"
+          className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-live-ember hover:text-live-ember/80 transition-colors border border-live-ember/20 px-3 py-2 rounded bg-live-ember/5"
         >
           <MapPin className="w-3 h-3" />
           View on Google Maps
@@ -484,18 +486,18 @@ const DetailCard = ({ item, sectionId }: { item: { name: string, detail: string,
 
       {item.fontFamily && item.samples && (
         <div className={`mt-6 p-6 bg-black/40 rounded-lg border border-zinc-800/50 ${item.fontFamily}`}>
-          <p className="text-[10px] font-sans uppercase tracking-[0.2em] text-zinc-600 mb-4 border-b border-zinc-800 pb-2">Font Preview</p>
+          <p className="text-[10px] font-sans uppercase tracking-[0.2em] text-zinc-500 mb-4 border-b border-zinc-800 pb-2">Font Preview</p>
           <div className="space-y-4">
             <div className="flex flex-col gap-1">
-              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-700">Upper Case</span>
+              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-500">Upper Case</span>
               <span className="text-2xl md:text-3xl text-zinc-100 break-all">{item.samples[0]}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-700">Lower Case</span>
+              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-500">Lower Case</span>
               <span className="text-2xl md:text-3xl text-zinc-100 break-all">{item.samples[1]}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-700">Alphabet</span>
+              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-500">Alphabet</span>
               <span className="text-xl md:text-2xl text-zinc-100 break-all leading-tight">The quick brown fox jumps over the lazy dog.</span>
             </div>
           </div>
@@ -509,6 +511,7 @@ export default function App() {
   const [activeId, setActiveId] = useState(BRAND_DATA[0].id);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+  const [showMobileNav, setShowMobileNav] = useState(false);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -517,21 +520,14 @@ export default function App() {
     restDelta: 0.001
   });
 
-  // Scroll listener for back to top button
   React.useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 500) {
-        setShowBackToTop(true);
-      } else {
-        setShowBackToTop(false);
-      }
+      setShowBackToTop(window.scrollY > 500);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Intersection Observer to highlight active section
   React.useEffect(() => {
     const observerOptions = {
       root: null,
@@ -548,7 +544,7 @@ export default function App() {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-    
+
     BRAND_DATA.forEach(section => {
       const element = document.getElementById(section.id);
       if (element) observer.observe(element);
@@ -560,7 +556,7 @@ export default function App() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80; // Header height
+      const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -571,63 +567,121 @@ export default function App() {
         behavior: 'smooth'
       });
     }
+    setShowMobileNav(false);
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-zinc-100 font-sans selection:bg-red-600 selection:text-white scroll-smooth">
+    <div className="min-h-screen bg-pit-black text-zinc-100 font-sans selection:bg-live-ember selection:text-white scroll-smooth">
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-red-600 z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-1 bg-live-ember z-[100] origin-left"
         style={{ scaleX }}
       />
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/80 backdrop-blur-md border-b border-zinc-800">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-pit-black/80 backdrop-blur-md border-b border-zinc-800">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="w-10 h-10 bg-red-600 flex items-center justify-center rounded-sm rotate-3">
+            <div className="w-10 h-10 bg-live-ember flex items-center justify-center rounded-sm rotate-3">
               <Flame className="text-white w-6 h-6" />
             </div>
-            <h1 className="text-2xl font-black uppercase tracking-tighter italic">
+            <div className="text-2xl font-black uppercase tracking-tighter italic">
               Mojo's
-            </h1>
+            </div>
           </div>
           <div className="hidden md:flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-500">
             <span>Est. 2026</span>
-            <span className="w-1 h-1 bg-red-600 rounded-full"></span>
+            <span className="w-1 h-1 bg-live-ember rounded-full"></span>
             <span>Rockin' Smash Burgers</span>
           </div>
+          <button
+            onClick={() => setShowMobileNav(true)}
+            aria-label="Open navigation"
+            aria-expanded={showMobileNav}
+            className="lg:hidden p-2 text-zinc-400 hover:text-white transition-colors"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
       </header>
+
+      {/* Mobile Nav Drawer */}
+      <AnimatePresence>
+        {showMobileNav && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowMobileNav(false)}
+              className="fixed inset-0 z-[80] bg-black/70 backdrop-blur-sm lg:hidden"
+            />
+            <motion.nav
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'tween', duration: 0.25 }}
+              aria-label="Brand navigation"
+              className="fixed top-0 left-0 bottom-0 w-80 z-[90] bg-pit-black border-r border-zinc-800 overflow-y-auto lg:hidden flex flex-col"
+            >
+              <div className="flex items-center justify-between px-6 h-20 border-b border-zinc-800 shrink-0">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-bold">Brand Architecture</p>
+                <button
+                  onClick={() => setShowMobileNav(false)}
+                  aria-label="Close navigation"
+                  className="p-2 text-zinc-500 hover:text-white transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="py-4 flex-1">
+                {BRAND_DATA.map((element) => (
+                  <NavItem
+                    key={element.id}
+                    element={element}
+                    active={activeId === element.id}
+                    onClick={() => scrollToSection(element.id)}
+                  />
+                ))}
+              </div>
+              <div className="m-6 p-4 bg-live-ember/10 border border-live-ember/20 rounded-lg">
+                <p className="text-[10px] text-live-ember font-bold uppercase mb-1">Confidential</p>
+                <p className="text-[9px] text-zinc-500 leading-tight">Internal use only. All designs are property of Mojo's.</p>
+              </div>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
-          <img 
+          <Img
             src={asset('/assets/imgs/website-hero-img.jpg')}
-            alt="Mojo's Hero" 
+            alt="Mojo's restaurant interior"
             className="w-full h-full object-cover opacity-40 grayscale"
             referrerPolicy="no-referrer"
+            loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/50 to-[#050505]"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pit-black/50 to-pit-black"></div>
         </div>
-        
+
         <div className="relative z-10 text-center px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-red-600 font-mono text-sm tracking-[0.4em] uppercase mb-4 block">Branding Suggestions</span>
+            <span className="text-live-ember font-mono text-sm tracking-[0.4em] uppercase mb-4 block">Branding Suggestions</span>
             <h1 className="text-[15vw] md:text-[12vw] font-display leading-[0.85] uppercase tracking-tighter mb-8">
               Mojo's
             </h1>
             <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed mb-12">
               All Flavour. No Fuss. The technical blueprint for the ultimate Mojo's.
             </p>
-            <button 
+            <button
               onClick={() => scrollToSection('identity')}
-              className="group relative px-8 py-4 bg-red-600 text-white font-bold uppercase tracking-widest text-sm overflow-hidden"
+              className="group relative px-8 py-4 bg-live-ember text-white font-bold uppercase tracking-widest text-sm overflow-hidden"
             >
               <span className="relative z-10">Explore the Brand</span>
               <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
@@ -636,19 +690,26 @@ export default function App() {
           </motion.div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+        <motion.div
+          animate={{ opacity: [1, 0.3, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        >
           <ChevronRight className="w-6 h-6 text-zinc-500 rotate-90" />
-        </div>
+        </motion.div>
       </section>
 
       <div className="flex">
         {/* Sticky Sidebar Navigation */}
-        <aside className="w-72 sticky top-20 h-[calc(100vh-80px)] border-r border-zinc-800 bg-[#050505] hidden lg:block overflow-y-auto">
+        <aside
+          aria-label="Brand sections"
+          className="w-72 sticky top-20 h-[calc(100vh-80px)] border-r border-zinc-800 bg-pit-black hidden lg:block overflow-y-auto"
+        >
           <div className="py-8">
             <div className="px-6 mb-8">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Brand Architecture</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-bold">Brand Architecture</p>
             </div>
-            <nav>
+            <nav aria-label="Brand navigation">
               {BRAND_DATA.map((element) => (
                 <NavItem
                   key={element.id}
@@ -659,20 +720,20 @@ export default function App() {
               ))}
             </nav>
           </div>
-          
-          <div className="absolute bottom-8 left-6 right-6 p-4 bg-red-600/10 border border-red-600/20 rounded-lg">
-            <p className="text-[10px] text-red-500 font-bold uppercase mb-1">Confidential</p>
+
+          <div className="absolute bottom-8 left-6 right-6 p-4 bg-live-ember/10 border border-live-ember/20 rounded-lg">
+            <p className="text-[10px] text-live-ember font-bold uppercase mb-1">Confidential</p>
             <p className="text-[9px] text-zinc-500 leading-tight">Internal use only. All designs are property of Mojo's.</p>
           </div>
         </aside>
 
         {/* Scrollable Content Area */}
-        <div className="flex-1 p-6 md:p-12 lg:p-24">
+        <main className="flex-1 p-6 md:p-12 lg:p-24">
           <div className="max-w-6xl mx-auto space-y-32 md:space-y-64">
-            {BRAND_DATA.map((element) => (
-              <section 
-                key={element.id} 
-                id={element.id} 
+            {BRAND_DATA.map((element, idx) => (
+              <section
+                key={element.id}
+                id={element.id}
                 className="scroll-mt-32"
               >
                 <motion.div
@@ -683,10 +744,12 @@ export default function App() {
                 >
                   <div className="mb-12">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="p-3 bg-zinc-900 rounded-lg text-red-600 border border-zinc-800">
+                      <div className="p-3 bg-zinc-900 rounded-lg text-live-ember border border-zinc-800">
                         {element.icon}
                       </div>
-                      <span className="text-red-600 font-mono text-sm tracking-widest">SECTION_{element.id.toUpperCase()}</span>
+                      <span className="text-live-ember font-mono text-sm tracking-widest">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
                     </div>
                     <h2 className="text-6xl md:text-9xl font-black uppercase tracking-tighter mb-8 leading-none">
                       {element.title}
@@ -698,14 +761,14 @@ export default function App() {
 
                   {/* Grid of details */}
                   <div className={`grid gap-8 mb-20 ${element.id === 'palette' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'}`}>
-                    {element.items.map((item, idx) => (
-                      <DetailCard key={idx} item={item} sectionId={element.id} />
+                    {element.items.map((item, itemIdx) => (
+                      <DetailCard key={itemIdx} item={item} sectionId={element.id} />
                     ))}
                   </div>
 
                   {/* Visual Moodboard Element */}
                   {element.id !== 'marketing' && (
-                    <div className={`relative rounded-2xl overflow-hidden border border-zinc-800 group transition-all duration-500 ${
+                    <div className={`relative rounded-2xl overflow-hidden border border-zinc-800 group transition-colors duration-500 ${
                       element.id === 'uniforms' ? 'aspect-[16/10]' : 'aspect-video'
                     }`}>
                       <Img
@@ -740,12 +803,12 @@ export default function App() {
                         }`}
                         referrerPolicy="no-referrer"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
-                      
+                      <div className="absolute inset-0 bg-gradient-to-t from-pit-black via-transparent to-transparent"></div>
+
                       {element.id === 'sound' && (
-                        <a 
-                          href="https://open.spotify.com/playlist/3VUPA31RZIHGmww45MSbTq?si=b76a62fbd4bf40ea" 
-                          target="_blank" 
+                        <a
+                          href="https://open.spotify.com/playlist/3VUPA31RZIHGmww45MSbTq?si=b76a62fbd4bf40ea"
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 backdrop-blur-[2px]"
                         >
@@ -761,11 +824,10 @@ export default function App() {
                       )}
 
                       <div className="absolute bottom-8 left-8">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Disc className="w-4 h-4 text-red-600 animate-spin-slow" />
+                        <div className="flex items-center gap-2">
+                          <Disc className="w-4 h-4 text-live-ember animate-spin-slow" />
                           <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-500">Moodboard Reference</span>
                         </div>
-                        <p className="text-2xl font-bold uppercase italic tracking-tight">Visualizing the {element.title} vibe</p>
                       </div>
                     </div>
                   )}
@@ -773,14 +835,14 @@ export default function App() {
               </section>
             ))}
           </div>
-        </div>
+        </main>
       </div>
 
       {/* Footer */}
       <footer className="lg:ml-72 border-t border-zinc-800 py-24 px-6 md:px-12 bg-zinc-950">
         <div className="max-w-4xl mx-auto flex flex-col items-start gap-8">
           <div className="flex items-center gap-6">
-            <div className="w-16 h-16 bg-red-600 flex items-center justify-center rounded-sm rotate-6">
+            <div className="w-16 h-16 bg-live-ember flex items-center justify-center rounded-sm rotate-6">
               <FlameKindling className="text-white w-10 h-10" />
             </div>
             <div>
@@ -788,9 +850,9 @@ export default function App() {
               <p className="text-xs text-zinc-500 mt-1">© 2026 All Rights Reserved. Smoked low, played loud.</p>
             </div>
           </div>
-          <button 
+          <button
             onClick={() => setShowPrivacyModal(true)}
-            className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-500 hover:text-red-600 transition-colors"
+            className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-500 hover:text-live-ember transition-colors"
           >
             Privacy Policy
           </button>
@@ -801,25 +863,26 @@ export default function App() {
       <AnimatePresence>
         {showPrivacyModal && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowPrivacyModal(false)}
               className="absolute inset-0 bg-black/90 backdrop-blur-sm"
             />
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="relative w-full max-w-2xl bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl"
             >
               <div className="p-8 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/50">
-                <h3 className="text-2xl font-black uppercase tracking-tighter italic">
-                  Privacy <span className="text-red-600">Policy</span>
-                </h3>
-                <button 
+                <h2 className="text-2xl font-black uppercase tracking-tighter italic">
+                  Privacy <span className="text-live-ember">Policy</span>
+                </h2>
+                <button
                   onClick={() => setShowPrivacyModal(false)}
+                  aria-label="Close privacy policy"
                   className="p-2 hover:bg-zinc-800 rounded-full transition-colors text-zinc-500 hover:text-white"
                 >
                   <X className="w-6 h-6" />
@@ -827,27 +890,27 @@ export default function App() {
               </div>
               <div className="p-8 max-h-[60vh] overflow-y-auto text-zinc-400 font-light leading-relaxed space-y-6">
                 <section>
-                  <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Introduction</h4>
+                  <h3 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Introduction</h3>
                   <p>At Mojo's, we value your privacy. This policy outlines how we handle information related to our branding guidelines and internal documentation.</p>
                 </section>
                 <section>
-                  <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Data Collection</h4>
+                  <h3 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Data Collection</h3>
                   <p>This branding site is for internal informational purposes. We do not collect personal data from visitors. Any interactions with this site are logged for performance monitoring only.</p>
                 </section>
                 <section>
-                  <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Confidentiality</h4>
+                  <h3 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Confidentiality</h3>
                   <p>All designs, color palettes, and brand assets contained within this document are the exclusive property of Mojo's. Unauthorized distribution is strictly prohibited.</p>
                 </section>
                 <section>
-                  <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Third-Party Links</h4>
+                  <h3 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Third-Party Links</h3>
                   <p>Our site may contain links to external services like Spotify or Google Maps. These services have their own privacy policies which we encourage you to review.</p>
                 </section>
                 <p className="text-[10px] text-zinc-600 pt-4 border-t border-zinc-800">Last Updated: March 2026</p>
               </div>
               <div className="p-6 bg-zinc-950 flex justify-end">
-                <button 
+                <button
                   onClick={() => setShowPrivacyModal(false)}
-                  className="px-6 py-2 bg-red-600 text-white font-bold uppercase tracking-widest text-xs rounded-sm hover:bg-red-700 transition-colors"
+                  className="px-6 py-2 bg-live-ember text-white font-bold uppercase tracking-widest text-xs rounded-sm hover:bg-smoldering-core transition-colors"
                 >
                   Close
                 </button>
@@ -867,7 +930,7 @@ export default function App() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-8 right-8 z-[60] w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center shadow-2xl shadow-red-600/20 border border-white/10 group"
+            className="fixed bottom-8 right-8 z-[60] w-12 h-12 bg-live-ember text-white rounded-full flex items-center justify-center shadow-2xl shadow-live-ember/20 border border-white/10 group"
             aria-label="Back to top"
           >
             <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />

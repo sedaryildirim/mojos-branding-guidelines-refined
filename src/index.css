@@ -6,10 +6,36 @@
   --font-display: "Anton", sans-serif;
   --font-heading: "Space Grotesk", sans-serif;
   --font-mono: "Roboto Mono", monospace;
+
+  /* Brand colour tokens */
+  --color-pit-black: #050505;
+  --color-card-surface: #111111;
+  --color-smoked-slate: #1A1A1A;
+  --color-iron-grid: #2E2E2E;
+  --color-cold-ash: #888888;
+  --color-live-ember: #E8003D;
+  --color-stage-light: #FF1F5A;
+  --color-smoldering-core: #C4003A;
+  --color-bone-white: #FFFFFF;
+  --color-backstage-cream: #F0EDE8;
 }
 
 @layer base {
   body {
-    @apply bg-[#050505] text-zinc-100;
+    @apply bg-pit-black text-zinc-100;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-live-ember);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
