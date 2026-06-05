@@ -15,14 +15,10 @@ import {
   Coffee,
   ChevronRight,
   Flame,
-  Zap,
   Disc,
-  Mic2,
   Monitor,
   MapPin,
   FlameKindling,
-  Copy,
-  Check,
   ArrowUp,
   X,
   Menu
@@ -183,8 +179,8 @@ const BRAND_DATA: BrandElement[] = [
       { name: 'Smoked Slate', detail: 'Menu card backgrounds. Subtle contrast for readability.', color: '#1A1A1A' },
       { name: 'Iron Grid', detail: 'Borders & dividers. Industrial-grade structural elements.', color: '#2E2E2E' },
       { name: 'Ash Grey', detail: 'Sub-category labels. Muted metadata and secondary info.', color: '#888888', hexTextColor: 'text-white' },
-      { name: 'Bone White', detail: 'All primary text. Maximum contrast and clarity.', color: '#FFFFFF' },
-      { name: 'Smoke White', detail: 'Text on red panels. Softened contrast for high-heat areas.', color: '#F0EDE8' }
+      { name: 'Bone White', detail: 'All primary text. Maximum contrast and clarity.', color: '#FFFFFF', hexTextColor: 'text-zinc-700' },
+      { name: 'Smoke White', detail: 'Text on red panels. Softened contrast for high-heat areas.', color: '#F0EDE8', hexTextColor: 'text-zinc-700' }
     ]
   },
   {
@@ -412,10 +408,10 @@ const NavItem = ({ element, active, onClick }: { element: BrandElement, active: 
   <button
     onClick={onClick}
     aria-current={active ? 'true' : undefined}
-    className={`w-full flex items-center gap-4 p-4 transition-colors duration-300 border-l-4 ${
+    className={`w-full flex items-center gap-4 p-4 transition-colors duration-300 ${
       active
-        ? 'bg-white/5 border-live-ember text-white'
-        : 'border-transparent text-zinc-500 hover:text-zinc-300 hover:bg-white/2'
+        ? 'bg-live-ember/10 text-white'
+        : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/2'
     }`}
   >
     <div className={`${active ? 'text-live-ember' : 'text-zinc-600'}`}>
@@ -466,10 +462,7 @@ const DetailCard = ({ item, sectionId }: { item: { name: string, detail: string,
           />
         </div>
       )}
-      <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-100 transition-opacity">
-        <Zap className="w-4 h-4 text-live-ember" />
-      </div>
-      <h4 className={`text-live-ember font-bold uppercase tracking-tighter text-lg mb-2 ${item.fontFamily || ''}`}>{item.name}</h4>
+      <h3 className={`text-live-ember font-bold uppercase tracking-tighter text-lg mb-2 ${item.fontFamily || ''}`}>{item.name}</h3>
       <p className="text-zinc-400 text-sm leading-relaxed mb-4 whitespace-pre-line">{item.detail}</p>
 
       {item.link && (
@@ -572,6 +565,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-pit-black text-zinc-100 font-sans selection:bg-live-ember selection:text-white scroll-smooth">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-live-ember focus:text-white focus:text-sm focus:font-bold focus:uppercase focus:tracking-widest focus:rounded"
+      >
+        Skip to content
+      </a>
+
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-live-ember z-[100] origin-left"
@@ -728,7 +728,7 @@ export default function App() {
         </aside>
 
         {/* Scrollable Content Area */}
-        <main className="flex-1 p-6 md:p-12 lg:p-24">
+        <main id="main-content" className="flex-1 p-6 md:p-12 lg:p-24">
           <div className="max-w-6xl mx-auto space-y-32 md:space-y-64">
             {BRAND_DATA.map((element, idx) => (
               <section
@@ -760,11 +760,27 @@ export default function App() {
                   </div>
 
                   {/* Grid of details */}
-                  <div className={`grid gap-8 mb-20 ${element.id === 'palette' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'}`}>
-                    {element.items.map((item, itemIdx) => (
-                      <DetailCard key={itemIdx} item={item} sectionId={element.id} />
-                    ))}
-                  </div>
+                  {element.id === 'palette' ? (
+                    <div className="grid grid-cols-3 sm:grid-cols-3 gap-1 mb-20 rounded-xl overflow-hidden border border-zinc-800">
+                      {element.items.map((item, itemIdx) => (
+                        <div
+                          key={itemIdx}
+                          className="relative aspect-[3/2] sm:aspect-square flex flex-col justify-end p-3 sm:p-4 group"
+                          style={{ backgroundColor: item.color }}
+                        >
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                          <span className={`relative text-[8px] sm:text-[10px] font-mono font-bold uppercase tracking-widest block mb-0.5 ${item.hexTextColor || 'text-white/50'}`}>{item.color}</span>
+                          <span className={`relative text-[10px] sm:text-xs font-bold leading-tight ${item.hexTextColor || 'text-white/80'}`}>{item.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="grid gap-8 mb-20 grid-cols-1 md:grid-cols-2">
+                      {element.items.map((item, itemIdx) => (
+                        <DetailCard key={itemIdx} item={item} sectionId={element.id} />
+                      ))}
+                    </div>
+                  )}
 
                   {/* Visual Moodboard Element */}
                   {element.id !== 'marketing' && (
@@ -905,7 +921,7 @@ export default function App() {
                   <h3 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Third-Party Links</h3>
                   <p>Our site may contain links to external services like Spotify or Google Maps. These services have their own privacy policies which we encourage you to review.</p>
                 </section>
-                <p className="text-[10px] text-zinc-600 pt-4 border-t border-zinc-800">Last Updated: March 2026</p>
+                <p className="text-[10px] text-zinc-400 pt-4 border-t border-zinc-800">Last Updated: March 2026</p>
               </div>
               <div className="p-6 bg-zinc-950 flex justify-end">
                 <button
@@ -938,28 +954,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <style>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
-        }
-        ::-webkit-scrollbar {
-          width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-          background: #050505;
-        }
-        ::-webkit-scrollbar-thumb {
-          background: #222;
-          border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-          background: #E8003D;
-        }
-      `}</style>
     </div>
   );
 }
