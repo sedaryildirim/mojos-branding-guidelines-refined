@@ -383,22 +383,22 @@ const BRAND_DATA: BrandElement[] = [
     items: [
       { 
         name: 'Take Out Packaging', 
-        detail: 'Pizza-style boxes for tacos/burgers with "Gig Poster" graphics. Heavy-duty, grease-resistant, and designed to be a collectible artifact.',
+        detail: 'Pizza-style boxes for tacos/burgers with "Gig Poster" graphics. Heavy-duty, grease-resistant.',
         image: asset('/assets/imgs/take-away-branding.jpg')
       },
       { 
         name: 'Website / Online Presence', 
-        detail: 'High-contrast, high-performance digital hub. Featuring live pit-cams, online ordering, and a "Tour Dates" style event calendar.',
+        detail: 'High-contrast, high-performance digital hub.',
         image: asset('/assets/imgs/website-hero-img.jpg')
       },
       { 
         name: 'Social Media Channels', 
-        detail: 'Aggressive, high-energy content. Focusing on the "Grab" shot, the sizzle of the pit, and the roar of the crowd. Consistent use of Mojo Crimson filters.',
+        detail: 'Aggressive, high-energy content. Focusing on the "Grab" shot.',
         image: asset('/assets/imgs/social-media-icons.jpg')
       },
       { 
         name: 'Sunday Roast Marketing', 
-        detail: 'Specialized "Family Set" campaigns. Emphasizing the "Low & Slow" tradition with a rock-and-roll twist. Large-format platters for the whole crew.',
+        detail: 'Aggressive marketing for Sunday Roasts. Showcase limited availability so people know they have to book — miss it and it\'s gone.',
         image: asset('/assets/imgs/sunday-roast.jpg')
       }
     ]
