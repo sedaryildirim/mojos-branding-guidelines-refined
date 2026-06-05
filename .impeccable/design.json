@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-05T00:00:00.000Z",
+  "title": "Design System: Mojo's Fire & Smoke",
+  "extensions": {
+    "colorMeta": {
+      "pit-black":      { "role": "neutral",   "displayName": "Pit Black",       "canonical": "oklch(4% 0.003 330)",  "tonalRamp": ["#050505","#0a0a0a","#111111","#1a1a1a","#242424","#2e2e2e","#3a3a3a","#484848"] },
+      "card-surface":   { "role": "neutral",   "displayName": "Card Surface",    "canonical": "oklch(8% 0.003 330)",  "tonalRamp": ["#080808","#111111","#1a1a1a","#222222","#2a2a2a","#333333","#3d3d3d","#4a4a4a"] },
+      "smoked-slate":   { "role": "neutral",   "displayName": "Smoked Slate",    "canonical": "oklch(12% 0.003 330)", "tonalRamp": ["#0d0d0d","#1a1a1a","#242424","#2e2e2e","#383838","#424242","#4e4e4e","#5a5a5a"] },
+      "iron-grid":      { "role": "neutral",   "displayName": "Iron Grid",       "canonical": "oklch(20% 0.003 330)", "tonalRamp": ["#181818","#2e2e2e","#3d3d3d","#4a4a4a","#585858","#666666","#747474","#888888"] },
+      "cold-ash":       { "role": "neutral",   "displayName": "Cold Ash",        "canonical": "oklch(58% 0.003 0)",   "tonalRamp": ["#333333","#444444","#555555","#666666","#777777","#888888","#999999","#aaaaaa"] },
+      "live-ember":     { "role": "primary",   "displayName": "Live Ember",      "canonical": "oklch(48% 0.265 16)",  "tonalRamp": ["#5c0016","#900025","#c40034","#e8003d","#ff1f5a","#ff4d75","#ff7a96","#ffb3c4"] },
+      "stage-light":    { "role": "primary",   "displayName": "Stage Light",     "canonical": "oklch(60% 0.265 12)",  "tonalRamp": ["#6b0020","#a0002f","#d40040","#ff1f5a","#ff4d75","#ff7a96","#ffaabf","#ffd6e0"] },
+      "smoldering-core":{ "role": "secondary", "displayName": "Smoldering Core", "canonical": "oklch(41% 0.24 16)",   "tonalRamp": ["#4a0012","#740020","#a0002e","#c4003a","#e0003f","#f72050","#ff5070","#ff90a0"] },
+      "bone-white":     { "role": "neutral",   "displayName": "Bone White",      "canonical": "oklch(100% 0 0)",      "tonalRamp": ["#aaaaaa","#bbbbbb","#cccccc","#dddddd","#e8e8e8","#f0f0f0","#f8f8f8","#ffffff"] },
+      "backstage-cream":{ "role": "neutral",   "displayName": "Backstage Cream", "canonical": "oklch(95% 0.008 80)",  "tonalRamp": ["#888070","#998f80","#aba090","#bdb0a0","#cfc0af","#e0d0be","#eae0d0","#f0ede8"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Hero title only. One instance per page. Architectural scale." },
+      "headline": { "displayName": "Headline", "purpose": "One per section. Reads as a room element, not a text label." },
+      "title":    { "displayName": "Title",    "purpose": "Card headings, nav labels. Always uppercase, tracked wide." },
+      "body":     { "displayName": "Body",     "purpose": "Section descriptions and card copy. Light weight only, 65-75ch max." },
+      "label":    { "displayName": "Label",    "purpose": "Prices, metadata, section identifiers. Monospace precision." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "scroll-progress",  "value": "spring(stiffness: 100, damping: 30)",       "purpose": "Progress bar scaleX. Motion spring via useSpring." },
+      { "name": "section-reveal",   "value": "opacity 0→1, translateY 50px→0, 600ms",     "purpose": "whileInView on each brand section. Once: true." },
+      { "name": "card-reveal",      "value": "opacity 0→1, translateY 20px→0",            "purpose": "DetailCard entrance. Staggered by grid position." },
+      { "name": "hover-transition", "value": "all 300ms ease-out",                        "purpose": "Border color shifts, image scale on DetailCard hover." },
+      { "name": "button-wipe",      "value": "translateY 100%→0, 300ms ease-out",        "purpose": "Primary button hover: white layer slides in from bottom." }
+    ],
+    "breakpoints": [
+      { "name": "lg", "value": "1024px", "purpose": "Sidebar becomes visible; below this, zero navigation exists (P1 audit gap)." },
+      { "name": "md", "value": "768px",  "purpose": "Grid switches from 1 to 2 columns; display type scales down." },
+      { "name": "sm", "value": "640px",  "purpose": "Color palette grid uses 2 columns." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Block stamp CTA. Hard edges, crimson flood, uppercase label. White wipe on hover.",
+      "html": "<button class=\"ds-btn-primary\"><span class=\"ds-btn-primary__label\">EXPLORE THE BRAND</span><div class=\"ds-btn-primary__wipe\"></div></button>",
+      "css": ".ds-btn-primary { position: relative; display: inline-flex; align-items: center; justify-content: center; background: #E8003D; color: #FFFFFF; padding: 16px 32px; border: none; border-radius: 0; font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; overflow: hidden; transition: color 300ms ease-out; } .ds-btn-primary:hover { color: #050505; } .ds-btn-primary:focus-visible { outline: 2px solid #E8003D; outline-offset: 2px; } .ds-btn-primary__label { position: relative; z-index: 1; } .ds-btn-primary__wipe { position: absolute; inset: 0; background: #FFFFFF; transform: translateY(100%); transition: transform 300ms ease-out; } .ds-btn-primary:hover .ds-btn-primary__wipe { transform: translateY(0); }"
+    },
+    {
+      "name": "Nav Item (Default)",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Sidebar navigation item at rest. Ash text, transparent left border, uppercase tracking.",
+      "html": "<button class=\"ds-nav-item\"><svg class=\"ds-nav-item__icon\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z\"/></svg><span class=\"ds-nav-item__label\">BRAND IDENTITY</span></button>",
+      "css": ".ds-nav-item { width: 100%; display: flex; align-items: center; gap: 16px; padding: 16px; background: transparent; border: none; border-left: 4px solid transparent; color: #888888; font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: color 300ms, background 300ms, border-color 300ms; } .ds-nav-item:hover { color: #cccccc; background: rgba(255,255,255,0.02); } .ds-nav-item:focus-visible { outline: 2px solid #E8003D; outline-offset: -2px; } .ds-nav-item__icon { width: 24px; height: 24px; flex-shrink: 0; color: #52525b; transition: color 300ms; } .ds-nav-item:hover .ds-nav-item__icon { color: #888888; } .ds-nav-item__label { font-size: 0.875rem; }"
+    },
+    {
+      "name": "Nav Item (Active)",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "Sidebar navigation item in active/current state. Crimson left border, white text.",
+      "html": "<button class=\"ds-nav-item ds-nav-item--active\" aria-current=\"true\"><svg class=\"ds-nav-item__icon\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z\"/></svg><span class=\"ds-nav-item__label\">BRAND IDENTITY</span><svg class=\"ds-nav-item__chevron\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M9 18l6-6-6-6\"/></svg></button>",
+      "css": ".ds-nav-item--active { border-left-color: #DC2626; background: rgba(255,255,255,0.05); color: #FFFFFF; } .ds-nav-item--active .ds-nav-item__icon { color: #DC2626; } .ds-nav-item__chevron { width: 16px; height: 16px; color: #DC2626; margin-left: auto; }"
+    },
+    {
+      "name": "Detail Card",
+      "kind": "card",
+      "refersTo": "detail-card",
+      "description": "Polymorphic content card. Media (image/swatch/map) above text block. Crimson border glow on hover.",
+      "html": "<div class=\"ds-detail-card\"><div class=\"ds-detail-card__media\"><img src=\"\" alt=\"Card image\" class=\"ds-detail-card__img\"></div><div class=\"ds-detail-card__lightning\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#E8003D\" stroke-width=\"2\"><path d=\"M13 2L3 14h9l-1 8 10-12h-9l1-8z\"/></svg></div><h4 class=\"ds-detail-card__title\">CARD TITLE</h4><p class=\"ds-detail-card__body\">Card body text describing the brand element in detail.</p></div>",
+      "css": ".ds-detail-card { position: relative; background: rgba(24,24,27,0.5); border: 1px solid #2E2E2E; border-radius: 8px; padding: 24px; overflow: hidden; transition: border-color 300ms; } .ds-detail-card:hover { border-color: rgba(232,0,61,0.5); } .ds-detail-card__media { aspect-ratio: 1; border-radius: 6px; overflow: hidden; border: 1px solid #2E2E2E; background: #050505; margin-bottom: 24px; } .ds-detail-card__img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease-out; } .ds-detail-card:hover .ds-detail-card__img { transform: scale(1.1); } .ds-detail-card__lightning { position: absolute; top: 8px; right: 8px; opacity: 0.1; transition: opacity 300ms; } .ds-detail-card:hover .ds-detail-card__lightning { opacity: 1; } .ds-detail-card__title { font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; font-weight: 700; color: #EF4444; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 8px; } .ds-detail-card__body { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 300; color: #A1A1AA; line-height: 1.6; margin: 0; }"
+    },
+    {
+      "name": "Progress Bar",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Scroll progress indicator. Fixed top, full width, 4px height, scaleX transform only.",
+      "html": "<div class=\"ds-progress-bar\" role=\"progressbar\" aria-label=\"Page scroll progress\" aria-valuenow=\"45\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>",
+      "css": ".ds-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: #E8003D; transform-origin: left; transform: scaleX(0.45); z-index: 100; pointer-events: none; }"
+    },
+    {
+      "name": "Back to Top",
+      "kind": "button",
+      "refersTo": null,
+      "description": "Circular crimson button, fixed bottom-right. ArrowUp icon shifts on hover.",
+      "html": "<button class=\"ds-back-to-top\" aria-label=\"Back to top\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 19V5M5 12l7-7 7 7\"/></svg></button>",
+      "css": ".ds-back-to-top { position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px; border-radius: 9999px; background: #E8003D; color: #FFFFFF; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 32px rgba(232,0,61,0.2); transition: transform 300ms ease-out; z-index: 60; } .ds-back-to-top:hover { transform: scale(1.1); } .ds-back-to-top:hover svg { transform: translateY(-4px); } .ds-back-to-top:focus-visible { outline: 2px solid #E8003D; outline-offset: 3px; } .ds-back-to-top svg { transition: transform 300ms ease-out; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Smokehouse Blackboard",
+    "overview": "Mojo's brand guidelines are a blackboard chalked in crimson on charcoal. Not a PDF, not a slide deck: a surface where everything is permanent, visible, and non-negotiable. The design system doesn't persuade; it states. The typography is enormous because the brand is enormous. The darkness is total because the brand lives at night, under neon, behind the pass.\n\nThis is a brand register surface where the design IS the product. An internal operator consulting it should feel the same brand energy they feel standing inside a Mojo's location. An external supplier should understand immediately that ambiguity is not an option here. The scrolling experience is a walk through the brand, section by section, each one self-contained and authoritative.\n\nWhat this system explicitly rejects: the friendly brightness of corporate fast food, the beige safety of food delivery app UI, the precious restraint of fine dining, and the hand-lettered earnestness of craft beer branding. This is none of those. It is a rock venue that happens to serve the best burger you've ever eaten.",
+    "keyCharacteristics": [
+      "Total darkness. #050505 is the floor; everything else is layered above it.",
+      "One voice in crimson. #E8003D punctuates, it does not flood.",
+      "Typography at extreme scale. Section headings are architectural elements, not labels.",
+      "Flat depth. No shadows. Tonal layering creates dimension.",
+      "Committed motion. Scroll-driven reveals, not scattered micro-interactions."
+    ],
+    "rules": [
+      { "name": "The One Ember Rule", "body": "Live Ember appears on no more than 15% of any given screen. Its job is to punctuate, not saturate. A page where crimson becomes the background has crossed into Stage Light territory (hero panels only).", "section": "colors" },
+      { "name": "The No-Lightening Rule", "body": "Never introduce a lighter background to soften or air out a section. The darkness is structural. If a section feels heavy, reduce content density; do not brighten the surface.", "section": "colors" },
+      { "name": "The Anton-Only Headlines Rule", "body": "No other font family appears at headline scale. Substituting Space Grotesk or Inter at large sizes reads as a design mistake, not a variant. Anton owns everything above 2rem.", "section": "typography" },
+      { "name": "The Counterweight Rule", "body": "Display/Headline weight is locked at the heaviest end. Body weight is locked at the lightest end. The contrast between 400-weight Anton and 300-weight Inter is the entire typographic argument. Introducing medium-weight body copy collapses it.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "No box-shadow on any surface, ever. If a component feels unanchored, the answer is a tonal background step, not a shadow. A shadow here would look like a mistake from a different design system.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep every background dark. If a section reads as light mode, it is wrong.",
+      "Do let Anton breathe at extreme scale. Headline text below 64px is not a headline.",
+      "Do use Live Ember for exactly one interactive role per screen region at a time.",
+      "Do reference the existing food photography style (overhead, matte black plates, dark stone surface) for any new image additions.",
+      "Do write button labels, nav items, and card headings in uppercase.",
+      "Do use Backstage Cream (#F0EDE8) for text on any crimson panel.",
+      "Do verify contrast ratios when adding secondary/label text. Cold Ash (#888888) is the floor."
+    ],
+    "donts": [
+      "Don't introduce light backgrounds. Not #F5F5F5, not #FAFAFA, not any tinted cream.",
+      "Don't use gradient text (background-clip: text). Use a single solid color.",
+      "Don't use box-shadow on any surface. The flat-by-default rule is absolute.",
+      "Don't make it look like corporate fast food (McDonald's, KFC).",
+      "Don't make it look like a food delivery app (Uber Eats, Grab).",
+      "Don't make it look like hipster craft branding (earth tones, hand-lettered, small batch).",
+      "Don't make it look like fine dining (minimal, white, precious, hushed).",
+      "Don't add a sidebar border stripe (border-left > 1px) to cards or content blocks as decoration.",
+      "Don't use glassmorphism except on the fixed header where it is structural.",
+      "Don't repeat the SECTION_* label pattern without verifying it carries real information.",
+      "Don't shrink the headline type. If it feels too big, that is the correct size."
+    ]
+  }
+}
