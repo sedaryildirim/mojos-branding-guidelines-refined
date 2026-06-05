@@ -191,7 +191,7 @@ const BRAND_DATA: BrandElement[] = [
       <>
         Our outposts across Thailand, each maintaining the core Mojo's identity.
         <br /><br />
-        <span className="text-base text-zinc-500 font-light leading-relaxed block">
+        <span className="text-base text-zinc-400 font-light leading-relaxed block">
           Bangkok expansion: target small outlet stores in high-volume, high-impact areas. Focus on Grab delivery above all else. Venues should be kitchen-forward and takeaway-optimised - minimal front-of-house, maximum output. Keep venue sizes small except where a full-size Mojo's is viable for Sunday Roasts and the sit-down crowd.
         </span>
       </>
@@ -411,10 +411,10 @@ const NavItem = ({ element, active, onClick }: { element: BrandElement, active: 
     className={`w-full flex items-center gap-4 p-4 transition-colors duration-300 ${
       active
         ? 'bg-live-ember/10 text-white'
-        : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/2'
+        : 'text-zinc-400 hover:text-zinc-300 hover:bg-white/2'
     }`}
   >
-    <div className={`${active ? 'text-live-ember' : 'text-zinc-600'}`}>
+    <div className={`${active ? 'text-live-ember' : 'text-zinc-400'}`}>
       {element.icon}
     </div>
     <span className="font-medium uppercase tracking-widest text-sm">{element.title}</span>
@@ -431,7 +431,7 @@ const DetailCard = ({ item, sectionId }: { item: { name: string, detail: string,
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="group relative bg-zinc-900/50 border border-zinc-800 p-6 rounded-lg hover:border-live-ember/50 transition-colors duration-300 overflow-hidden"
+      className="group relative bg-zinc-900/50 border border-zinc-800 p-6 rounded-lg transition-colors duration-300 overflow-hidden"
     >
       {item.color ? (
         <div className="mb-6 aspect-square rounded-md overflow-hidden border border-zinc-800 flex items-center justify-center relative group/color" style={{ backgroundColor: item.color }}>
@@ -479,18 +479,18 @@ const DetailCard = ({ item, sectionId }: { item: { name: string, detail: string,
 
       {item.fontFamily && item.samples && (
         <div className={`mt-6 p-6 bg-black/40 rounded-lg border border-zinc-800/50 ${item.fontFamily}`}>
-          <p className="text-[10px] font-sans uppercase tracking-[0.2em] text-zinc-500 mb-4 border-b border-zinc-800 pb-2">Font Preview</p>
+          <p className="text-[10px] font-sans uppercase tracking-[0.2em] text-zinc-400 mb-4 border-b border-zinc-800 pb-2">Font Preview</p>
           <div className="space-y-4">
             <div className="flex flex-col gap-1">
-              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-500">Upper Case</span>
+              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-400">Upper Case</span>
               <span className="text-2xl md:text-3xl text-zinc-100 break-all">{item.samples[0]}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-500">Lower Case</span>
+              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-400">Lower Case</span>
               <span className="text-2xl md:text-3xl text-zinc-100 break-all">{item.samples[1]}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-500">Alphabet</span>
+              <span className="text-[8px] font-sans uppercase tracking-widest text-zinc-400">Alphabet</span>
               <span className="text-xl md:text-2xl text-zinc-100 break-all leading-tight">The quick brown fox jumps over the lazy dog.</span>
             </div>
           </div>
@@ -505,6 +505,41 @@ export default function App() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
+
+  const privacyTriggerRef = React.useRef<HTMLButtonElement>(null);
+  const privacyModalRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (showPrivacyModal) {
+      const firstFocusable = privacyModalRef.current?.querySelector<HTMLElement>(
+        'button, [href], input, [tabindex]:not([tabindex="-1"])'
+      );
+      firstFocusable?.focus();
+
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setShowPrivacyModal(false);
+      };
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
+    } else {
+      privacyTriggerRef.current?.focus();
+    }
+  }, [showPrivacyModal]);
+
+  const handleModalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== 'Tab') return;
+    const focusable = Array.from(
+      privacyModalRef.current?.querySelectorAll<HTMLElement>(
+        'button, [href], input, [tabindex]:not([tabindex="-1"])'
+      ) ?? []
+    ) as HTMLElement[];
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+      e.preventDefault();
+      (e.shiftKey ? last : first)?.focus();
+    }
+  };
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -589,7 +624,7 @@ export default function App() {
               Mojo's
             </div>
           </div>
-          <div className="hidden md:flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-500">
+          <div className="hidden md:flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400">
             <span>Est. 2026</span>
             <span className="w-1 h-1 bg-live-ember rounded-full"></span>
             <span>Rockin' Smash Burgers</span>
@@ -625,11 +660,11 @@ export default function App() {
               className="fixed top-0 left-0 bottom-0 w-80 z-[90] bg-pit-black border-r border-zinc-800 overflow-y-auto lg:hidden flex flex-col"
             >
               <div className="flex items-center justify-between px-6 h-20 border-b border-zinc-800 shrink-0">
-                <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-bold">Brand Architecture</p>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold">Brand Architecture</p>
                 <button
                   onClick={() => setShowMobileNav(false)}
                   aria-label="Close navigation"
-                  className="p-2 text-zinc-500 hover:text-white transition-colors"
+                  className="p-2 text-zinc-400 hover:text-white transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -646,7 +681,7 @@ export default function App() {
               </div>
               <div className="m-6 p-4 bg-live-ember/10 border border-live-ember/20 rounded-lg">
                 <p className="text-[10px] text-live-ember font-bold uppercase mb-1">Confidential</p>
-                <p className="text-[9px] text-zinc-500 leading-tight">Internal use only. All designs are property of Mojo's.</p>
+                <p className="text-[9px] text-zinc-400 leading-tight">Internal use only. All designs are property of Mojo's.</p>
               </div>
             </motion.nav>
           </>
@@ -695,7 +730,7 @@ export default function App() {
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
-          <ChevronRight className="w-6 h-6 text-zinc-500 rotate-90" />
+          <ChevronRight className="w-6 h-6 text-zinc-400 rotate-90" />
         </motion.div>
       </section>
 
@@ -707,7 +742,7 @@ export default function App() {
         >
           <div className="py-8">
             <div className="px-6 mb-8">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-bold">Brand Architecture</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 font-bold">Brand Architecture</p>
             </div>
             <nav aria-label="Brand navigation">
               {BRAND_DATA.map((element) => (
@@ -723,7 +758,7 @@ export default function App() {
 
           <div className="absolute bottom-8 left-6 right-6 p-4 bg-live-ember/10 border border-live-ember/20 rounded-lg">
             <p className="text-[10px] text-live-ember font-bold uppercase mb-1">Confidential</p>
-            <p className="text-[9px] text-zinc-500 leading-tight">Internal use only. All designs are property of Mojo's.</p>
+            <p className="text-[9px] text-zinc-400 leading-tight">Internal use only. All designs are property of Mojo's.</p>
           </div>
         </aside>
 
@@ -751,7 +786,7 @@ export default function App() {
                         {String(idx + 1).padStart(2, '0')}
                       </span>
                     </div>
-                    <h2 className="text-6xl md:text-9xl font-black uppercase tracking-tighter mb-8 leading-none">
+                    <h2 className="text-5xl md:text-7xl lg:text-9xl font-black uppercase tracking-tighter mb-8 leading-none">
                       {element.title}
                     </h2>
                     <div className="text-xl md:text-2xl text-zinc-400 max-w-3xl font-light leading-relaxed mb-12">
@@ -842,7 +877,7 @@ export default function App() {
                       <div className="absolute bottom-8 left-8">
                         <div className="flex items-center gap-2">
                           <Disc className="w-4 h-4 text-live-ember animate-spin-slow" />
-                          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-500">Moodboard Reference</span>
+                          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400">Moodboard Reference</span>
                         </div>
                       </div>
                     </div>
@@ -863,12 +898,13 @@ export default function App() {
             </div>
             <div>
               <p className="text-xl font-black uppercase tracking-widest text-white italic">Mojo's</p>
-              <p className="text-xs text-zinc-500 mt-1">© 2026 All Rights Reserved. Smoked low, played loud.</p>
+              <p className="text-xs text-zinc-400 mt-1">© 2026 All Rights Reserved. Smoked low, played loud.</p>
             </div>
           </div>
           <button
+            ref={privacyTriggerRef}
             onClick={() => setShowPrivacyModal(true)}
-            className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-500 hover:text-live-ember transition-colors"
+            className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 hover:text-live-ember transition-colors"
           >
             Privacy Policy
           </button>
@@ -887,19 +923,24 @@ export default function App() {
               className="absolute inset-0 bg-black/90 backdrop-blur-sm"
             />
             <motion.div
+              ref={privacyModalRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="privacy-modal-title"
+              onKeyDown={handleModalKeyDown}
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="relative w-full max-w-2xl bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl"
             >
               <div className="p-8 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/50">
-                <h2 className="text-2xl font-black uppercase tracking-tighter italic">
+                <h2 id="privacy-modal-title" className="text-2xl font-black uppercase tracking-tighter italic">
                   Privacy <span className="text-live-ember">Policy</span>
                 </h2>
                 <button
                   onClick={() => setShowPrivacyModal(false)}
                   aria-label="Close privacy policy"
-                  className="p-2 hover:bg-zinc-800 rounded-full transition-colors text-zinc-500 hover:text-white"
+                  className="p-2 hover:bg-zinc-800 rounded-full transition-colors text-zinc-400 hover:text-white"
                 >
                   <X className="w-6 h-6" />
                 </button>
