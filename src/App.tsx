@@ -75,12 +75,12 @@ const BRAND_DATA: BrandElement[] = [
     items: [
       { 
         name: 'The Concept', 
-        detail: "Mojo's is a bold, flavour-first American comfort food destination. Think crispy, indulgent, unapologetically satisfying — the kind of food that has regulars coming back twice a week and first-timers instantly hooked.\n\nBold. Flavor-first. Unapologetic.\n\nThe Vibe: Indulgent American comfort food.\n\nThe Food: Crispy, satisfying, and high-impact.\n\nThe Goal: Instant hooks and high-frequency regulars.",
+        detail: "Mojo's is a bold, flavour-first American comfort food destination. Think crispy, indulgent, unapologetically satisfying - the kind of food that has regulars coming back twice a week and first-timers instantly hooked.\n\nBold. Flavor-first. Unapologetic.\n\nThe Vibe: Indulgent American comfort food.\n\nThe Food: Crispy, satisfying, and high-impact.\n\nThe Goal: Instant hooks and high-frequency regulars.",
         image: asset('/assets/imgs/the-style-vibe.jpg')
       },
       { 
         name: 'Smash Burgers', 
-        detail: "The undisputed hero. Seven builds ranging from the classic Bacon Cheese to the showstopping Brisket, each one crafted with intention. These aren't afterthoughts — they're the reason people walk through the door.\n\nThe main event. Seven intentional builds—from the Classic Bacon Cheese to the signature Brisket.\n\nPurpose: The primary driver of foot traffic.\n\nRange: 7-8 distinct, chef-driven variations.\n\nQuality: Zero afterthoughts; pure intention.",
+        detail: "The undisputed hero. Seven builds ranging from the classic Bacon Cheese to the showstopping Brisket, each one crafted with intention. These aren't afterthoughts - they're the reason people walk through the door.\n\nThe main event. Seven intentional builds-from the Classic Bacon Cheese to the signature Brisket.\n\nPurpose: The primary driver of foot traffic.\n\nRange: 7-8 distinct, chef-driven variations.\n\nQuality: Zero afterthoughts; pure intention.",
         image: asset('/assets/imgs/smash-burger.jpg')
       },
       { 
@@ -95,7 +95,7 @@ const BRAND_DATA: BrandElement[] = [
       },
       { 
         name: 'The Feeling', 
-        detail: "Mojo's doesn't take itself too seriously — but it takes its food very seriously. It's relaxed, confident, and a little bit rowdy. \"The best meal you didn't need to dress up for.\"",
+        detail: "Mojo's doesn't take itself too seriously - but it takes its food very seriously. It's relaxed, confident, and a little bit rowdy. \"The best meal you didn't need to dress up for.\"",
         image: asset('/assets/imgs/the-feeling-group-shot.jpg')
       },
       { 
@@ -109,7 +109,7 @@ const BRAND_DATA: BrandElement[] = [
     id: 'logo',
     title: 'Logo Identity',
     icon: <Disc className="w-6 h-6" />,
-    description: 'The visual heartbeat of Mojo\'s. A bold, circular emblem that signifies the "Fire & Smoke" philosophy.',
+    description: 'The visual heartbeat of Mojo\'s. A bold, circular emblem that signifies the Mojo\'s identity.',
     items: [
       { 
         name: 'Master Logo: Variation 1', 
@@ -190,7 +190,7 @@ const BRAND_DATA: BrandElement[] = [
     id: 'locations',
     title: 'Locations & Venues',
     icon: <MapPin className="w-6 h-6" />,
-    description: 'Our outposts across Thailand, each maintaining the core Fire & Smoke identity.',
+    description: 'Our outposts across Thailand, each maintaining the core Mojo\'s identity.',
     items: [
       { 
         name: 'Lamai Outpost', 
@@ -207,14 +207,14 @@ const BRAND_DATA: BrandElement[] = [
       { 
         name: 'Thong Sala', 
         detail: 'Food Court - Quick, Dirty Take away, location good for tourists and KPG Delivery radius', 
-        mapEmbed: 'https://maps.google.com/maps?q=Mojo\'s%20Fire%20and%20Smoke%20Thong%20Sala%20Koh%20Phangan&t=&z=15&ie=UTF8&iwloc=&output=embed',
+        mapEmbed: 'https://maps.google.com/maps?q=Mojo%27s%20Thong%20Sala%20Koh%20Phangan&t=&z=15&ie=UTF8&iwloc=&output=embed',
         link: 'https://maps.app.goo.gl/ReKr3REoTqDEpkRr6'
       },
-      { 
-        name: 'Baan Tai Night Market', 
-        detail: 'Good Location overall, but market layout / inside location not adequte, good delivery location', 
-        mapEmbed: 'https://maps.google.com/maps?q=9.699998076770726,100.02440791043722&t=&z=15&ie=UTF8&iwloc=&output=embed',
-        link: 'https://maps.app.goo.gl/vtM7A59EjdcjCCrY9'
+      {
+        name: 'Nathon Pier',
+        detail: 'New Koh Samui outpost at Nathon Pier. Prime transit location with high footfall from ferry arrivals and local market traffic.',
+        mapEmbed: 'https://maps.google.com/maps?q=9.5353,100.0573&t=&z=15&ie=UTF8&iwloc=&output=embed',
+        link: 'https://share.google/qIevEGbOijtmd6MGl'
       }
     ]
   },
@@ -236,7 +236,7 @@ const BRAND_DATA: BrandElement[] = [
       },
       { 
         name: 'Taco Plate', 
-        detail: 'Elongated platter for our Fire & Smoke tacos. Perfect for sharing and displaying vibrant salsa colors.',
+        detail: 'Elongated platter for our tacos. Perfect for sharing and displaying vibrant salsa colors.',
         image: asset('/assets/imgs/matte-black-burger-taco-plates.jpg')
       },
       { 
@@ -287,7 +287,7 @@ const BRAND_DATA: BrandElement[] = [
       { name: 'The Full Look', detail: 'Dark / denim look, with pop of colour depending on style preference for bandanas - fits with the dark red / blacks of the colour branding - logo can be red also! make it pop.', image: asset('/assets/imgs/staff-full-uniform.jpg') },
       { 
         name: 'Accessories', 
-        detail: 'Branded "Fire & Smoke" bandanas and guitar-pick-shaped name badges.',
+        detail: 'Branded Mojo\'s bandanas and guitar-pick-shaped name badges.',
         image: asset('/assets/imgs/mojos-bandana.jpg')
       }
     ]
@@ -296,11 +296,11 @@ const BRAND_DATA: BrandElement[] = [
     id: 'sound',
     title: 'Sound & Music',
     icon: <Music className="w-6 h-6" />,
-    description: 'The heartbeat of Mojo’s. If it doesn’t have soul and grit, it doesn’t play.',
+    description: "The heartbeat of Mojo's. If it doesn't have soul and grit, it doesn't play.",
     items: [
       { 
         name: 'Classic Soul & Motown Royalty', 
-        detail: 'Deep roots in 1960s–70s soul — Marvin Gaye, Aretha Franklin, Stevie Wonder, Sam & Dave, Wilson Pickett, Al Green. The foundation of the playlist, full of groove, emotion, and timeless vocal power.',
+        detail: 'Deep roots in 1960s-70s soul - Marvin Gaye, Aretha Franklin, Stevie Wonder, Sam & Dave, Wilson Pickett, Al Green. The foundation of the playlist, full of groove, emotion, and timeless vocal power.',
         image: asset('/assets/imgs/stevie-wonder-album.jpg')
       },
       { 
@@ -326,22 +326,32 @@ const BRAND_DATA: BrandElement[] = [
     icon: <Utensils className="w-6 h-6" />,
     description: (
       <>
-        Mojo’s is a dedicated <strong className="text-white font-bold">lunch, dinner, and late-night destination</strong> built on the pillars of <strong className="text-white font-bold">legendary smash burgers, tacos, starters and loaded fries</strong>. To maintain our identity, we prioritize <strong className="text-white font-bold">perfecting the core menu</strong> over expansion; while <strong className="text-white font-bold">Sunday Roasts and localized brunches</strong> align with our roots, early morning coffee, juices, and breakfast are excluded to <strong className="text-white font-bold">prevent brand dilution</strong>. By sticking to what we do best, we ensure every bite is a <strong className="text-white font-bold">"hero" experience</strong> that protects our position as a <strong className="text-white font-bold">premier burger and beer venue</strong>.
+        Mojo's spans <strong className="text-white font-bold">breakfast through late-night</strong>, built on the pillars of <strong className="text-white font-bold">legendary smash burgers, tacos, loaded fries, and morning sandwiches</strong>. The core evening menu stays sacred, while a <strong className="text-white font-bold">focused breakfast and sandwich offering</strong> captures morning market share without diluting the brand. Every daypart has a <strong className="text-white font-bold">hero item</strong> - bold, unapologetic, built for regulars.
       </>
     ),
     items: [
-      { 
-        name: 'The Smash Burger', 
+      {
+        name: 'The Smash Burger',
         detail: 'Our core focus. High-quality beef, smashed thin for maximum crust, served on toasted buns with signature Mojo sauce.',
         image: asset('/assets/imgs/smash-burger.jpg')
       },
-      { 
-        name: 'Fire & Smoke Tacos', 
+      {
+        name: 'Mojo\'s Tacos',
         detail: 'Brisket and Pulled Pork served on fried cheese tallow tortillas with salsa roja and fresh cilantro.',
         image: asset('/assets/imgs/buttermilk-chicken-taco.jpg')
       },
-      { 
-        name: 'Chicken Loaded Fries', 
+      {
+        name: 'Breakfast Sandwiches',
+        detail: 'Morning-market anchors. Crispy fried chicken or smashed beef patty on a toasted brioche bun with fried egg, American cheese, and chipotle aioli. Available from open until noon.',
+        image: asset('/assets/imgs/smash-burger.jpg')
+      },
+      {
+        name: 'Sandwiches',
+        detail: 'Smash patty melts, brisket reubens, and crispy chicken clubs. Served on sourdough or brioche with pit-smoke coleslaw and house pickles. Built for the lunch crowd and takeaway trade.',
+        image: asset('/assets/imgs/brisket-loaded-fries.jpg')
+      },
+      {
+        name: 'Chicken Loaded Fries',
         detail: 'Our signature fries topped with buttermilk fried chicken and spicy Mojo sauce.',
         image: asset('/assets/imgs/chicken-loaded-fries.jpg')
       },
@@ -351,12 +361,7 @@ const BRAND_DATA: BrandElement[] = [
         image: asset('/assets/imgs/southern-fried-wings.jpg')
       },
       {
-        name: 'Southern Fried Tenders',
-        detail: 'Hand-breaded buttermilk chicken tenders, served with a side of pit-fire salsa.',
-        image: asset('/assets/imgs/chicken-tenders.jpg')
-      },
-      { 
-        name: 'The Sweet Stuff', 
+        name: 'The Sweet Stuff',
         detail: 'Indulgent finishers: Basque burnt cheesecake and ultra-thick honeycomb malt shakes.',
         image: asset('/assets/imgs/chocolate-brownie.jpg')
       }
@@ -576,7 +581,7 @@ export default function App() {
               <Flame className="text-white w-6 h-6" />
             </div>
             <h1 className="text-2xl font-black uppercase tracking-tighter italic">
-              Mojo's <span className="text-red-600">Fire & Smoke</span>
+              Mojo's
             </h1>
           </div>
           <div className="hidden md:flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-500">
@@ -607,8 +612,7 @@ export default function App() {
           >
             <span className="text-red-600 font-mono text-sm tracking-[0.4em] uppercase mb-4 block">Official Branding Guidelines</span>
             <h1 className="text-[15vw] md:text-[12vw] font-display leading-[0.85] uppercase tracking-tighter mb-8">
-              Mojo's <br />
-              <span className="text-red-600">Fire & Smoke</span>
+              Mojo's
             </h1>
             <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed mb-12">
               All Flavour. No Fuss. The technical blueprint for the ultimate American comfort food destination.
@@ -650,7 +654,7 @@ export default function App() {
           
           <div className="absolute bottom-8 left-6 right-6 p-4 bg-red-600/10 border border-red-600/20 rounded-lg">
             <p className="text-[10px] text-red-500 font-bold uppercase mb-1">Confidential</p>
-            <p className="text-[9px] text-zinc-500 leading-tight">Internal use only. All designs are property of Mojo's Fire & Smoke.</p>
+            <p className="text-[9px] text-zinc-500 leading-tight">Internal use only. All designs are property of Mojo's.</p>
           </div>
         </aside>
 
@@ -772,7 +776,7 @@ export default function App() {
               <FlameKindling className="text-white w-10 h-10" />
             </div>
             <div>
-              <p className="text-xl font-black uppercase tracking-widest text-white italic">Mojo's Fire & Smoke</p>
+              <p className="text-xl font-black uppercase tracking-widest text-white italic">Mojo's</p>
               <p className="text-xs text-zinc-500 mt-1">© 2026 All Rights Reserved. Smoked low, played loud.</p>
             </div>
           </div>
@@ -816,7 +820,7 @@ export default function App() {
               <div className="p-8 max-h-[60vh] overflow-y-auto text-zinc-400 font-light leading-relaxed space-y-6">
                 <section>
                   <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Introduction</h4>
-                  <p>At Mojo's Fire & Smoke, we value your privacy. This policy outlines how we handle information related to our branding guidelines and internal documentation.</p>
+                  <p>At Mojo's, we value your privacy. This policy outlines how we handle information related to our branding guidelines and internal documentation.</p>
                 </section>
                 <section>
                   <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Data Collection</h4>
@@ -824,7 +828,7 @@ export default function App() {
                 </section>
                 <section>
                   <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Confidentiality</h4>
-                  <p>All designs, color palettes, and brand assets contained within this document are the exclusive property of Mojo's Fire & Smoke. Unauthorized distribution is strictly prohibited.</p>
+                  <p>All designs, color palettes, and brand assets contained within this document are the exclusive property of Mojo's. Unauthorized distribution is strictly prohibited.</p>
                 </section>
                 <section>
                   <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Third-Party Links</h4>
