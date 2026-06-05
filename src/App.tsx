@@ -190,7 +190,15 @@ const BRAND_DATA: BrandElement[] = [
     id: 'locations',
     title: 'Locations & Venues',
     icon: <MapPin className="w-6 h-6" />,
-    description: 'Our outposts across Thailand, each maintaining the core Mojo\'s identity.',
+    description: (
+      <>
+        Our outposts across Thailand, each maintaining the core Mojo's identity.
+        <br /><br />
+        <span className="text-base text-zinc-500 font-light leading-relaxed block">
+          Bangkok expansion: target small outlet stores in high-volume, high-impact areas. Focus on Grab delivery above all else. Venues should be kitchen-forward and takeaway-optimised - minimal front-of-house, maximum output. Keep venue sizes small except where a full-size Mojo's is viable for Sunday Roasts and the sit-down crowd.
+        </span>
+      </>
+    ),
     items: [
       { 
         name: 'Lamai Outpost', 
@@ -615,7 +623,7 @@ export default function App() {
               Mojo's
             </h1>
             <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed mb-12">
-              All Flavour. No Fuss. The technical blueprint for the ultimate American comfort food destination.
+              All Flavour. No Fuss. The technical blueprint for the ultimate Mojo's.
             </p>
             <button 
               onClick={() => scrollToSection('identity')}
