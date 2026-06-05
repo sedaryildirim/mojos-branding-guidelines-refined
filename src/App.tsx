@@ -10,7 +10,6 @@ import {
   Utensils,
   Palette,
   Type,
-  Layout,
   Users,
   Coffee,
   ChevronRight,
@@ -48,16 +47,16 @@ interface BrandElement {
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 const withFormat = (src: string, fmt: string) => src.replace(/\.(jpg|jpeg|png)$/, `.${fmt}`);
 
-const Img = ({ src, alt, className, referrerPolicy, loading }: {
-  src: string; alt: string; className?: string; referrerPolicy?: string; loading?: 'lazy' | 'eager';
+const Img = ({ src, alt, className, loading }: {
+  src: string; alt: string; className?: string; loading?: 'lazy' | 'eager';
 }) => {
   const isLocal = !src.startsWith('http');
-  if (!isLocal) return <img src={src} alt={alt} className={className} referrerPolicy={referrerPolicy} loading={loading} />;
+  if (!isLocal) return <img src={src} alt={alt} className={className} referrerPolicy="no-referrer" loading={loading} />;
   return (
     <picture>
       <source srcSet={withFormat(src, 'avif')} type="image/avif" />
       <source srcSet={withFormat(src, 'webp')} type="image/webp" />
-      <img src={src} alt={alt} className={className} referrerPolicy={referrerPolicy} loading={loading} />
+      <img src={src} alt={alt} className={className} loading={loading} />
     </picture>
   );
 };
@@ -402,9 +401,23 @@ const BRAND_DATA: BrandElement[] = [
   }
 ];
 
+// --- Lookup tables ---
+const MOODBOARD_IMAGES: Record<string, string> = {
+  identity: asset('/assets/imgs/the-style-vibe.jpg'),
+  palette: asset('/assets/imgs/colour-palette-hero-img.jpg'),
+  tableware: asset('/assets/imgs/tableware-hero-img.jpg'),
+  locations: 'https://i.imgur.com/gNL13PE.jpeg',
+  logo: asset('/assets/imgs/mojos-logo-hero.jpg'),
+  typography: asset('/assets/imgs/typography-hero-image.jpg'),
+  sound: asset('/assets/imgs/music-playlist-bg.jpg'),
+  menu: asset('/assets/imgs/food-hero-shot.jpg'),
+  uniforms: asset('/assets/imgs/staff-full-uniform.jpg'),
+  furniture: asset('/assets/imgs/furniture-style-ideas.jpg'),
+};
+
 // --- Components ---
 
-const NavItem = ({ element, active, onClick }: { element: BrandElement, active: boolean, onClick: () => void, key?: React.Key }) => (
+const NavItem = ({ element, active, onClick }: { element: BrandElement; active: boolean; onClick: () => void; key?: React.Key }) => (
   <button
     onClick={onClick}
     aria-current={active ? 'true' : undefined}
@@ -426,7 +439,7 @@ const NavItem = ({ element, active, onClick }: { element: BrandElement, active: 
   </button>
 );
 
-const DetailCard = ({ item, sectionId }: { item: { name: string, detail: string, image?: string, mapEmbed?: string, link?: string, color?: string, hexTextColor?: string, fontFamily?: string, samples?: string[], objectFit?: 'cover' | 'contain' }, sectionId: string, key?: React.Key }) => {
+const DetailCard = ({ item }: { item: { name: string; detail: string; image?: string; mapEmbed?: string; link?: string; color?: string; hexTextColor?: string; fontFamily?: string; samples?: string[]; objectFit?: 'cover' | 'contain' }; key?: React.Key }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -434,7 +447,7 @@ const DetailCard = ({ item, sectionId }: { item: { name: string, detail: string,
       className="group relative bg-zinc-900/50 border border-zinc-800 p-6 rounded-lg transition-colors duration-300 overflow-hidden"
     >
       {item.color ? (
-        <div className="mb-6 aspect-square rounded-md overflow-hidden border border-zinc-800 flex items-center justify-center relative group/color" style={{ backgroundColor: item.color }}>
+        <div className="mb-6 aspect-square rounded-md overflow-hidden border border-zinc-800 flex items-center justify-center" style={{ backgroundColor: item.color }}>
           <span className={`text-[10px] font-mono font-bold uppercase tracking-widest ${item.hexTextColor ? item.hexTextColor : 'text-white/40 mix-blend-difference'}`}>
             {item.color}
           </span>
@@ -452,12 +465,11 @@ const DetailCard = ({ item, sectionId }: { item: { name: string, detail: string,
           ></iframe>
         </div>
       ) : item.image && (
-        <div className="mb-6 aspect-square rounded-md overflow-hidden border border-zinc-800 bg-black p-4 relative group/image">
+        <div className="mb-6 aspect-square rounded-md overflow-hidden border border-zinc-800 bg-black p-4 relative">
           <Img
             src={item.image}
             alt={item.name}
             className={`w-full h-full ${item.objectFit === 'contain' ? 'object-contain' : 'object-cover'} group-hover:scale-110 transition-transform duration-500`}
-            referrerPolicy="no-referrer"
             loading="lazy"
           />
         </div>
@@ -508,9 +520,11 @@ export default function App() {
 
   const privacyTriggerRef = React.useRef<HTMLButtonElement>(null);
   const privacyModalRef = React.useRef<HTMLDivElement>(null);
+  const modalWasOpen = React.useRef(false);
 
   React.useEffect(() => {
     if (showPrivacyModal) {
+      modalWasOpen.current = true;
       const firstFocusable = privacyModalRef.current?.querySelector<HTMLElement>(
         'button, [href], input, [tabindex]:not([tabindex="-1"])'
       );
@@ -521,23 +535,24 @@ export default function App() {
       };
       document.addEventListener('keydown', handleEscape);
       return () => document.removeEventListener('keydown', handleEscape);
-    } else {
+    } else if (modalWasOpen.current) {
       privacyTriggerRef.current?.focus();
     }
   }, [showPrivacyModal]);
 
   const handleModalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'Tab') return;
-    const focusable = Array.from(
-      privacyModalRef.current?.querySelectorAll<HTMLElement>(
-        'button, [href], input, [tabindex]:not([tabindex="-1"])'
-      ) ?? []
-    ) as HTMLElement[];
+    const focusable: HTMLElement[] = privacyModalRef.current
+      ? Array.from(privacyModalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, [tabindex]:not([tabindex="-1"])'
+        ))
+      : [];
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
     if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
       e.preventDefault();
-      (e.shiftKey ? last : first)?.focus();
+      const target: HTMLElement = e.shiftKey ? last : first;
+      target?.focus();
     }
   };
 
@@ -558,7 +573,6 @@ export default function App() {
 
   React.useEffect(() => {
     const observerOptions = {
-      root: null,
       rootMargin: '-20% 0px -70% 0px',
       threshold: 0
     };
@@ -582,16 +596,10 @@ export default function App() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
+    const el = document.getElementById(id);
+    if (el) {
       window.scrollTo({
-        top: offsetPosition,
+        top: el.getBoundingClientRect().top + window.scrollY - 80,
         behavior: 'smooth'
       });
     }
@@ -695,7 +703,6 @@ export default function App() {
             src={asset('/assets/imgs/website-hero-img.jpg')}
             alt="Mojo's restaurant interior"
             className="w-full h-full object-cover opacity-40 grayscale"
-            referrerPolicy="no-referrer"
             loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pit-black/50 to-pit-black"></div>
@@ -796,7 +803,7 @@ export default function App() {
 
                   {/* Grid of details */}
                   {element.id === 'palette' ? (
-                    <div className="grid grid-cols-3 sm:grid-cols-3 gap-1 mb-20 rounded-xl overflow-hidden border border-zinc-800">
+                    <div className="grid grid-cols-3 gap-1 mb-20 rounded-xl overflow-hidden border border-zinc-800">
                       {element.items.map((item, itemIdx) => (
                         <div
                           key={itemIdx}
@@ -812,7 +819,7 @@ export default function App() {
                   ) : (
                     <div className="grid gap-8 mb-20 grid-cols-1 md:grid-cols-2">
                       {element.items.map((item, itemIdx) => (
-                        <DetailCard key={itemIdx} item={item} sectionId={element.id} />
+                        <DetailCard key={itemIdx} item={item} />
                       ))}
                     </div>
                   )}
@@ -823,36 +830,13 @@ export default function App() {
                       element.id === 'uniforms' ? 'aspect-[16/10]' : 'aspect-video'
                     }`}>
                       <Img
-                        src={
-                          element.id === 'identity'
-                            ? asset('/assets/imgs/the-style-vibe.jpg')
-                            : element.id === 'palette'
-                              ? asset('/assets/imgs/colour-palette-hero-img.jpg')
-                              : element.id === 'tableware'
-                                ? asset('/assets/imgs/tableware-hero-img.jpg')
-                                : element.id === 'locations'
-                              ? 'https://i.imgur.com/gNL13PE.jpeg'
-                              : element.id === 'logo'
-                                ? asset('/assets/imgs/mojos-logo-hero.jpg')
-                                : element.id === 'typography'
-                                  ? asset('/assets/imgs/typography-hero-image.jpg')
-                                  : element.id === 'sound'
-                                    ? asset('/assets/imgs/music-playlist-bg.jpg')
-                                    : element.id === 'menu'
-                                      ? asset('/assets/imgs/food-hero-shot.jpg')
-                                      : element.id === 'uniforms'
-                                        ? asset('/assets/imgs/staff-full-uniform.jpg')
-                                        : element.id === 'furniture'
-                                          ? asset('/assets/imgs/furniture-style-ideas.jpg')
-                                          : `https://picsum.photos/seed/${element.id}/1200/800?grayscale`
-                        }
+                        src={MOODBOARD_IMAGES[element.id] ?? `https://picsum.photos/seed/${element.id}/1200/800?grayscale`}
                         alt={element.title}
                         className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${
                           element.id === 'uniforms'
                             ? 'object-top opacity-90'
                             : 'object-[center_35%] opacity-40'
                         }`}
-                        referrerPolicy="no-referrer"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-pit-black via-transparent to-transparent"></div>
 
